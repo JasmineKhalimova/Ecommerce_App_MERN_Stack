@@ -1,4 +1,4 @@
-# Ecommerce_App_MERN_Stack
+# Book store Ecommerce_App_MERN_Stack
 Building an eCommerce app using MongoDB Express.js React.js and Node.js MERN stack
 
 This is the backend of the application Express and Node.js using Mongo Atlas
