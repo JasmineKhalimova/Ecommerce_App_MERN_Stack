@@ -21,3 +21,9 @@ Using MonngoDB Atlas
 DB required package instialtions to connect DB
 
 mongoose: npm i mongoose
+
+User types:
+
+0 = General type user 
+
+1 = Admin type user
