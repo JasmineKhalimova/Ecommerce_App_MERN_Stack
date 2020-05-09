@@ -11,6 +11,10 @@ Install required packages
 - dotenv: for environmental variables
 - nodemon: to run server continuously 
     npm i express doten nodemon
+- body parser and morgan: useful for seding data through routes 
+    npm i body-parser morgan 
+-Cookie parser: to save user credentials in the cookie
+    npm i cookie-parser
 
 *Note Node executes whatever is in app.js to execute the app: node app.json
 
