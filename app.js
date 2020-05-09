@@ -4,6 +4,7 @@ const mongoose = require("mongoose");// DB connection
 const morgan = require("morgan");// using morgan as middlewares
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");// to save user credentials in the cookie
+const expressValidator = require("express-validator");// to validate user credentials
 
 
 require("dotenv").config();
@@ -25,6 +26,7 @@ mongoose.connect(process.env.DATABASE,{
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(expressValidator());
 
 //Routes
 app.use("/api", userRoutes); //using user routes

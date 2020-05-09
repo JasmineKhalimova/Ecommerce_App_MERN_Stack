@@ -15,6 +15,11 @@ Install required packages
     npm i body-parser morgan 
 -Cookie parser: to save user credentials in the cookie
     npm i cookie-parser
+-express-validator: v 5.3.1 required otherwise will recieve error: "TypeError: expressValidator is not a function"
+    npm i express-validator
+After installing the express-validator then go to your package.json and update it to use version to use 5.3.1 like so -> "express-validator": "^5.3.1",
+
+Then go to your terminal and run: npm install
 
 *Note Node executes whatever is in app.js to execute the app: node app.json
 
