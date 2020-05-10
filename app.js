@@ -10,7 +10,8 @@ const expressValidator = require("express-validator");// to validate user creden
 require("dotenv").config();
 
 // importing routes
-const userRoutes = require("./routes/user");//user routes
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
 //app
 const app = express();
@@ -29,7 +30,8 @@ app.use(cookieParser());
 app.use(expressValidator());
 
 //Routes
-app.use("/api", userRoutes); //using user routes
+app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 
 const port = process.env.PORT || 8000;
 
