@@ -5,23 +5,23 @@ This is the backend of the application Express and Node.js using Mongo Atlas
 
 Install required packages
 
-- pakage.json file 
+- pakage.json file:
     npm init -y
 
-- express:framework for Node.js, dotenv: for environmental variables, nodemon: to run server continuously 
+- express:framework for Node.js, dotenv: for environmental variables, nodemon: to run server continuously: 
     npm i express doten nodemon
     
-- body parser and morgan: useful for seding data through routes 
+- body parser and morgan: useful for seding data through routes: 
     npm i body-parser morgan 
 
-- Cookie parser: to save user credentials in the cookie
+- Cookie parser: to save user credentials in the cookie: 
     npm i cookie-parser
 
-- express-validator: v 5.3.1 required otherwise will recieve error: "TypeError: expressValidator is not a function"
+- express-validator: v 5.3.1 required otherwise will recieve error: "TypeError: expressValidator is not a function": 
     npm i express-validator
 After installing the express-validator then go to your package.json and update it to use version to use 5.3.1 like so -> "express-validator": "^5.3.1",
 
-- json web token: for user signin
+- json web token: for user signin:  
     npm i express-jwt jsonwebtoken
 
 
