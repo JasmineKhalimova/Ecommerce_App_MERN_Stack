@@ -1,6 +1,12 @@
-//required statements
+//require statements
 const express = require("express");
-const mongoose = require("mongoose");
+const mongoose = require("mongoose");// DB connection
+const morgan = require("morgan");// using morgan as middlewares
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");// to save user credentials in the cookie
+const expressValidator = require("express-validator");// to validate user credentials
+
+
 require("dotenv").config();
 
 // importing routes
@@ -16,8 +22,14 @@ mongoose.connect(process.env.DATABASE,{
     useUnifiedTopology: true
 }).then(()=>console.log('DB Connected'));
 
-//routes
-app.use("/api", userRoutes);//using user routes
+//Middlewares
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(expressValidator());
+
+//Routes
+app.use("/api", userRoutes); //using user routes
 
 const port = process.env.PORT || 8000;
 
