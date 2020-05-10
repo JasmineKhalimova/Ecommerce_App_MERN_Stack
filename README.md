@@ -42,3 +42,10 @@ User types:
 0 = General type user 
 
 1 = Admin type user
+
+Commit messages:
+    press "i"
+    write your merge message
+    press "esc"
+    write ":wq"
+    then press enter
