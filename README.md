@@ -24,6 +24,9 @@ After installing the express-validator then go to your package.json and update i
 - json web token: for user signin:  
     npm i express-jwt jsonwebtoken
 
+- formidable and lodash: to upload and send files and images:
+    npm i formidable lodash
+
 
 Then go to your terminal and run: npm install
 
