@@ -11,10 +11,26 @@ exports.create = (req, res) => {
         if(err) {
             return res.status(400).json ({
                 error: "Image could not be uploaded"
-            })
+            });
         }
-        let product = new Product (fields)
+        //setting validation for all the fields 
+        const { name, description, price, category, quantity, shipping } = fields
+
+        if(!name || !description || !price || !category || !quantity || !shipping){
+            return res.status(400).json({
+                error: "All fields are required"
+            });
+        }
+
+        let product = new Product (fields);
+
         if(files.photo){
+            // image validation 2mb = 2000000
+            if(files.photo.size > 2000000){
+                return res.status(400).json({
+                    error: "Image should be less than 1mb in size"
+                });
+            }
             product.photo.data = fs.readFileSync(files.photo.path);
             product.photo.contentType = files.photo.type;
         }
