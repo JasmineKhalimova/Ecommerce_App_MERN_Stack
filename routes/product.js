@@ -6,8 +6,8 @@ const{requireSignin, isAuth, isAdmin} = require("../controllers/auth");
 
 
 router.post("/product/create/:userId", requireSignin, isAdmin, isAuth, create);// Create
-router.put("/product/:productId/:userId", requireSignin, isAdmin, isAuth, update); //Update
 router.get("/product/:productId", read);// Read
+router.put("/product/:productId/:userId", requireSignin, isAdmin, isAuth, update); //Update
 router.delete("/product/:productId/:userId", requireSignin, isAdmin, isAuth, remove); // Delete
 
 router.param("userId", userById);
