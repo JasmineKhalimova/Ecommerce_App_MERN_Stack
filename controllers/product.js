@@ -4,6 +4,26 @@ const fs = require("fs");// getting access to file system
 const Product = require("../models/product");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
+//creating product by id method
+exports.productById = (req, res, next, id) => {
+    Product.findById(id).exec((err, product) => {
+        if(err || !product){
+            return res.status(400).json({
+                error: "Product not found"
+            });
+        }
+        req.product = product;
+        next();
+    });
+};
+
+// product read request method
+exports.read = (req, res) => {
+    req.product.photo = undefined;
+    return res.json(req.product);
+};
+
+// image and file upload method
 exports.create = (req, res) => {
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
@@ -19,7 +39,7 @@ exports.create = (req, res) => {
         if(!name || !description || !price || !category || !quantity || !shipping){
             return res.status(400).json({
                 error: "All fields are required"
-            });
+            }); 
         }
 
         let product = new Product (fields);
@@ -41,6 +61,23 @@ exports.create = (req, res) => {
                 });
             }
             res.json(result);
+        });
+    });
+};
+
+// Delete method
+exports.remove = (req, res) => {
+
+    let product = req.product
+
+    product.remove((err, deletedProduct) =>{
+        if(err){
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json({
+            message: "Product deleted successfully"
         });
     });
 };
