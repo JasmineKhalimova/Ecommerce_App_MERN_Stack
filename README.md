@@ -27,6 +27,8 @@ After installing the express-validator then go to your package.json and update i
 - formidable and lodash: to upload and send files and images:
     npm i formidable lodash
 
+- cors: for providing a Connect/Express middleware that can be used to enable CORS with various options.
+    npm install cors
 
 Then go to your terminal and run: npm install
 

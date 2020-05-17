@@ -5,7 +5,7 @@ const morgan = require("morgan");// using morgan as middlewares
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");// to save user credentials in the cookie
 const expressValidator = require("express-validator");// to validate user credentials
-
+const cors = require("cors");// to handle api request from different origin
 
 require("dotenv").config();
 
@@ -30,6 +30,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
+app.use(cors());
 
 //Routes
 app.use("/api", authRoutes);
