@@ -54,3 +54,8 @@ Commit messages:
     press "esc"
     write ":wq"
     then press enter
+    
+ Git error:
+ allow-unrelated-histories switch. After a git pull or git merge command, add the following tag:
+
+git pull origin master --allow-unrelated-histories
