@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const{ create, productById, read, remove, update, list, listRealated, listCategories, listBySearch, photo } = require("../controllers/product"); // Defining all the variables 
+const{ create, productById, read, remove, update, list, listRealated, listCategories, listBySearch, listSearch, photo } = require("../controllers/product"); // Defining all the variables 
 const{userById} = require("../controllers/user");
 const{requireSignin, isAuth, isAdmin} = require("../controllers/auth");
 
@@ -13,7 +13,8 @@ router.delete("/product/:productId/:userId", requireSignin, isAdmin, isAuth, rem
 router.get("/products", list);// making request to get all products in list format
 router.get("/products/related/:productId", listRealated); // getting related products 
 router.get("/products/categories", listCategories); // getting all the product category list
-router.post("/products/by/search", listBySearch); // getting products by search method 
+router.get("/products/search", listSearch); // getting products by search method 
+router.post("/products/by/search", listBySearch); // getting products by list search method 
 router.get("/product/photo/:productId", photo); // getting product photo
 
 
