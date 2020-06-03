@@ -1,13 +1,12 @@
-const User = require("../models/user");
-const Order = require("../models/order");
-const { errorHandler } = require("../helpers/dbErrorHandler");
+const User = require('../models/user');
+const { Order } = require('../models/order');
+const { errorHandler } = require('../helpers/dbErrorHandler');
 
-// sorting user by id
 exports.userById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
-        if(err || !user){
+        if (err || !user) {
             return res.status(400).json({
-                error: "User not found"
+                error: 'User not found'
             });
         }
         req.profile = user;
@@ -15,15 +14,14 @@ exports.userById = (req, res, next, id) => {
     });
 };
 
-// Get user info mathod
 exports.read = (req, res) => {
     req.profile.hashed_password = undefined;
     req.profile.salt = undefined;
     return res.json(req.profile);
 };
 
-// Updated user info
 exports.update = (req, res) => {
+    // console.log('UPDATE USER - req.user', req.user, 'UPDATE DATA', req.body);
     const { name, password } = req.body;
 
     User.findOne({ _id: req.profile._id }, (err, user) => {
@@ -64,7 +62,6 @@ exports.update = (req, res) => {
     });
 };
 
-// User order history 
 exports.addOrderToUserHistory = (req, res, next) => {
     let history = [];
 
@@ -90,7 +87,6 @@ exports.addOrderToUserHistory = (req, res, next) => {
     });
 };
 
-// Purchase History Method
 exports.purchaseHistory = (req, res) => {
     Order.find({ user: req.profile._id })
         .populate('user', '_id name')
