@@ -29,7 +29,9 @@ After installing the express-validator then go to your package.json and update i
 
 - cors: for providing a Connect/Express middleware that can be used to enable CORS with various options.
     npm install cors
-
+    
+- Install Braintree for the payment systems
+    npm i braintree
 Then go to your terminal and run: npm install
 
 *Note Node executes whatever is in app.js to execute the app: node app.json
