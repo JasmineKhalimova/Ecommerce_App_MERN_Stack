@@ -2,6 +2,7 @@ const User = require('../models/user');
 const braintree = require('braintree');
 require('dotenv').config();
 
+// Beaintree configuration
 const gateway = braintree.connect({
     environment: braintree.Environment.Sandbox, // Production
     merchantId: process.env.BRAINTREE_MERCHANT_ID,

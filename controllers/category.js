@@ -1,7 +1,7 @@
-const Category = require("../models/category");
-const { errorHandler } = require("../helpers/dbErrorHandler");
+const Category = require('../models/category');
+const Product = require('../models/product');
+const { errorHandler } = require('../helpers/dbErrorHandler');
 
-// Category find by Id
 exports.categoryById = (req, res, next, id) => {
     Category.findById(id).exec((err, category) => {
         if (err || !category) {
@@ -14,7 +14,6 @@ exports.categoryById = (req, res, next, id) => {
     });
 };
 
-//Create method
 exports.create = (req, res) => {
     const category = new Category(req.body);
     category.save((err, data) => {
@@ -27,12 +26,10 @@ exports.create = (req, res) => {
     });
 };
 
-//Read Method
 exports.read = (req, res) => {
     return res.json(req.category);
 };
 
-//Update method 
 exports.update = (req, res) => {
     console.log('req.body', req.body);
     console.log('category update param', req.params.categoryId);
@@ -49,10 +46,9 @@ exports.update = (req, res) => {
     });
 };
 
-//Delete method
 exports.remove = (req, res) => {
     const category = req.category;
-    Category.find({ category }).exec((err, data) => {
+    Product.find({ category }).exec((err, data) => {
         if (data.length >= 1) {
             return res.status(400).json({
                 message: `Sorry. You cant delete ${category.name}. It has ${data.length} associated products.`
@@ -72,7 +68,6 @@ exports.remove = (req, res) => {
     });
 };
 
-// List method
 exports.list = (req, res) => {
     Category.find().exec((err, data) => {
         if (err) {
