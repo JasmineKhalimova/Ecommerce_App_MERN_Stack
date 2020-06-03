@@ -32,7 +32,9 @@ After installing the express-validator then go to your package.json and update i
     
 - Install Braintree for the payment systems
     npm i braintree
-Then go to your terminal and run: npm install
+    
+- install @sendgrid/mail for mail testing
+    npm i @sendgrid/mail
 
 *Note Node executes whatever is in app.js to execute the app: node app.json
 
