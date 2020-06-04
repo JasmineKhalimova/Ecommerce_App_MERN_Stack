@@ -2,7 +2,7 @@ const User = require('../models/user');
 const braintree = require('braintree');
 require('dotenv').config();
 
-// Beaintree configuration
+// BRAINTEE CONFIG
 const gateway = braintree.connect({
     environment: braintree.Environment.Sandbox, // Production
     merchantId: process.env.BRAINTREE_MERCHANT_ID,
@@ -10,6 +10,7 @@ const gateway = braintree.connect({
     privateKey: process.env.BRAINTREE_PRIVATE_KEY
 });
 
+// BRAINTREE CONNECTION
 exports.generateToken = (req, res) => {
     gateway.clientToken.generate({}, function(err, response) {
         if (err) {
@@ -20,6 +21,7 @@ exports.generateToken = (req, res) => {
     });
 };
 
+// PAYMENT PROCESS
 exports.processPayment = (req, res) => {
     let nonceFromTheClient = req.body.paymentMethodNonce;
     let amountFromTheClient = req.body.amount;

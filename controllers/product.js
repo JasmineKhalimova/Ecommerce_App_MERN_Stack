@@ -4,6 +4,7 @@ const fs = require('fs');
 const Product = require('../models/product');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
+// GET PRODUCT BY ID
 exports.productById = (req, res, next, id) => {
     Product.findById(id)
         .populate('category')
@@ -18,11 +19,7 @@ exports.productById = (req, res, next, id) => {
         });
 };
 
-exports.read = (req, res) => {
-    req.product.photo = undefined;
-    return res.json(req.product);
-};
-
+// PRODUCT - CREATE
 exports.create = (req, res) => {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
@@ -47,7 +44,6 @@ exports.create = (req, res) => {
         // 1mb = 1000000
 
         if (files.photo) {
-            // console.log("FILES PHOTO: ", files.photo);
             if (files.photo.size > 1000000) {
                 return res.status(400).json({
                     error: 'Image should be less than 1mb in size'
@@ -69,20 +65,13 @@ exports.create = (req, res) => {
     });
 };
 
-exports.remove = (req, res) => {
-    let product = req.product;
-    product.remove((err, deletedProduct) => {
-        if (err) {
-            return res.status(400).json({
-                error: errorHandler(err)
-            });
-        }
-        res.json({
-            message: 'Product deleted successfully'
-        });
-    });
+// PRODUCT - READ
+exports.read = (req, res) => {
+    req.product.photo = undefined;
+    return res.json(req.product);
 };
 
+// PRODUCT - UPDATE
 exports.update = (req, res) => {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
@@ -121,6 +110,21 @@ exports.update = (req, res) => {
     });
 };
 
+// PRODUCT - DELETE
+exports.remove = (req, res) => {
+    let product = req.product;
+    product.remove((err, deletedProduct) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json({
+            message: 'Product deleted successfully'
+        });
+    });
+};
+
 /**
  * sell / arrival
  * by sell = /products?sortBy=sold&order=desc&limit=4
@@ -128,6 +132,7 @@ exports.update = (req, res) => {
  * if no params are sent, then all products are returned
  */
 
+ // GET ALL PRODUCTS - LIST ORDER
 exports.list = (req, res) => {
     let order = req.query.order ? req.query.order : 'asc';
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
@@ -153,6 +158,7 @@ exports.list = (req, res) => {
  * other products that has the same category, will be returned
  */
 
+// RELATED PRODUCTS
 exports.listRelated = (req, res) => {
     let limit = req.query.limit ? parseInt(req.query.limit) : 6;
 
@@ -169,6 +175,7 @@ exports.listRelated = (req, res) => {
         });
 };
 
+// RELATED CATEOGRIES
 exports.listCategories = (req, res) => {
     Product.distinct('category', {}, (err, categories) => {
         if (err) {
@@ -264,6 +271,7 @@ exports.listSearch = (req, res) => {
     }
 };
 
+// DECREASE PRODUCT QUANATIRY
 exports.decreaseQuantity = (req, res, next) => {
     let bulkOps = req.body.order.products.map(item => {
         return {

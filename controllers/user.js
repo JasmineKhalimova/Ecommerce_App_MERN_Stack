@@ -2,6 +2,7 @@ const User = require('../models/user');
 const { Order } = require('../models/order');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
+// GET USER BY ID
 exports.userById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
         if (err || !user) {
@@ -14,12 +15,14 @@ exports.userById = (req, res, next, id) => {
     });
 };
 
+// USER - READ
 exports.read = (req, res) => {
     req.profile.hashed_password = undefined;
     req.profile.salt = undefined;
     return res.json(req.profile);
 };
 
+//USER - UPDATE
 exports.update = (req, res) => {
     const { name, password } = req.body;
 
@@ -40,7 +43,7 @@ exports.update = (req, res) => {
         if (password) {
             if (password.length < 6) {
                 return res.status(400).json({
-                    error: 'Password should be min 6 characters long'
+                    error: 'Password should be min 6 characters or more'
                 });
             } else {
                 user.password = password;
@@ -61,6 +64,7 @@ exports.update = (req, res) => {
     });
 };
 
+// USER - ORDER
 exports.addOrderToUserHistory = (req, res, next) => {
     let history = [];
 
@@ -86,6 +90,7 @@ exports.addOrderToUserHistory = (req, res, next) => {
     });
 };
 
+// USER - PURCHASE HISTORY
 exports.purchaseHistory = (req, res) => {
     Order.find({ user: req.profile._id })
         .populate('user', '_id name')
